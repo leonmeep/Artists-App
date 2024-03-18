@@ -12,15 +12,16 @@ class ArtistController extends Controller
         $search = $request->search;
         $hidden = ['created_at', 'updated_at'];
 
-        if($search) {
+        if ($search) {
             return response()->json([
                 'message' => 'Artists returned.',
-                'data' => Artist::where('name', 'LIKE', "%$search%")->get()->makehidden($hidden)
+                'data' => Artist::where('name', 'LIKE', "%$search%")->get()->makehidden($hidden),
             ]);
         }
+
         return response()->json([
             'message' => 'Artists returned.',
-            'data' => Artist::all()->makeHidden($hidden)
+            'data' => Artist::all()->makeHidden($hidden),
         ]);
 
     }
@@ -28,8 +29,8 @@ class ArtistController extends Controller
     public function getSingle(int $id)
     {
         return response()->json([
-            'message'=>'Artist returned',
-            'data'=> Artist::find($id)
+            'message' => 'Artist returned',
+            'data' => Artist::find($id),
         ]);
     }
 
@@ -44,7 +45,6 @@ class ArtistController extends Controller
             'country_of_death' => 'max:100|string',
         ]);
 
-
         $artist = new Artist();
 
         $artist->name = $request->name;
@@ -56,11 +56,12 @@ class ArtistController extends Controller
 
         if (! $artist->save()) {
             return response()->json([
-                'message' => 'Error, the Artist could not be created.'
+                'message' => 'Error, the Artist could not be created.',
             ], 500);
         }
+
         return response()->json([
-            'message'=> 'Artist has been successfully created.'
+            'message' => 'Artist has been successfully created.',
         ], 201);
     }
 
@@ -72,13 +73,13 @@ class ArtistController extends Controller
             'country_of_birth' => 'required|max:100|string',
             'medium' => 'max:100|string',
             'movement' => 'max:300|string',
-            'country_of_death' => 'max:100|string'
+            'country_of_death' => 'max:100|string',
         ]);
 
         $artist = Artist::find($id);
         if (! $artist) {
             return response()->json([
-                'message'=>'Error, the Artist id is invalid.'
+                'message' => 'Error, the Artist id is invalid.',
             ], 404);
         }
         $artist->name = $request->name;
@@ -90,26 +91,28 @@ class ArtistController extends Controller
 
         if (! $artist->save()) {
             return response()->json([
-                'message' => 'Error, update has not been saved.'
+                'message' => 'Error, update has not been saved.',
             ], 500);
 
-        }return response()->json([
-            'message'=>'The Artist has been successfully updated.'
-    ]);
+        }
+
+return response()->json([
+            'message' => 'The Artist has been successfully updated.',
+        ]);
     }
 
     public function delete(int $id)
     {
         $artist = Artist::find($id);
-        if (!$artist) {
+        if (! $artist) {
             return response()->json([
-                'message' => 'Error, the Artist id is invalid.'
+                'message' => 'Error, the Artist id is invalid.',
             ], 400);
         }
         $artist->delete();
 
         return response()->json([
-            'message' => 'The Artist has successfully been deleted.'
+            'message' => 'The Artist has successfully been deleted.',
         ], 201);
     }
 }
