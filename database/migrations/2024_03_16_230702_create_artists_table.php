@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->date('dob');
-            $table->string('movement')->nullable();
+            $table->string('country_of_birth', 100);
+            $table->string('medium', 100)->nullable();
+            $table->string('movement', 300)->nullable();
             $table->timestamps();
         });
     }
