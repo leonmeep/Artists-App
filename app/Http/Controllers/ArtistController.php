@@ -11,17 +11,17 @@ class ArtistController extends Controller
     {
         $artists = Artist::all();
 
-        return ($artists);
+        return $artists;
     }
 
     public function getSingle(int $id)
     {
         $artist = Artist::find($id);
 
-        return ($artist);
+        return $artist;
     }
 
-    public function create( Request $request)
+    public function create(Request $request)
     {
         $request->validate([
             'name' => 'required|max:100|string',
@@ -29,7 +29,7 @@ class ArtistController extends Controller
             'country_of_birth' => 'required|max:100|string',
             'medium' => 'max:100|string',
             'movement' => 'max:300|string',
-            'country_of_death' => 'max:100|string'
+            'country_of_death' => 'max:100|string',
         ]);
 
         $artist = new Artist();
@@ -56,8 +56,7 @@ class ArtistController extends Controller
             'country_of_birth' => 'required|max:100|string',
             'medium' => 'max:100|string',
             'movement' => 'max:300|string',
-            'country_of_death' => 'max:100|string' ]);
-
+            'country_of_death' => 'max:100|string']);
 
         $artist = Artist::find($id);
         if (! $artist) {
@@ -80,13 +79,11 @@ class ArtistController extends Controller
     public function delete(int $id)
     {
         $artist = Artist::find($id);
-        if (! $artist){
+        if (! $artist) {
             return response('Error, invalid artist id.');
         }
         $artist->delete();
 
         return response('The artist has been deleted.');
     }
-
-
 }
