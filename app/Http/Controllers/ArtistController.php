@@ -31,7 +31,7 @@ class ArtistController extends Controller
         return response()->json([
             'message' => 'Artist returned',
             'data' => Artist::find($id),
-        ]);
+        ], 201);
     }
 
     public function create(Request $request)
@@ -96,9 +96,9 @@ class ArtistController extends Controller
 
         }
 
-return response()->json([
+        return response()->json([
             'message' => 'The Artist has been successfully updated.',
-        ]);
+        ], 201);
     }
 
     public function delete(int $id)
