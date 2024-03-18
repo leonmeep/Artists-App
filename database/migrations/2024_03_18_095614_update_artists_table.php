@@ -12,8 +12,6 @@ return new class extends Migration
 
             $table->string('country_of_death', 100)->nullable();
 
-
-
         });
 
     }
